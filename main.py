@@ -2,7 +2,7 @@ import streamlit as st
 import locale
 import os
 import platform
-
+from functions import cleanup_temp_files
 from pytube import YouTube
 import base64
 
@@ -25,6 +25,17 @@ locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 st.set_page_config(page_title='Youtube Downloader')
 
 st.title('Youtube Downloader')
+
+# Diretório temporário para armazenar os arquivos baixados temporariamente
+temp_dir = "temp_files"
+
+# Criar diretório temporário se não existir
+if not os.path.exists(temp_dir):
+    os.makedirs(temp_dir)
+
+# Limpar arquivos temporários ao iniciar o aplicativo
+cleanup_temp_files(temp_dir)
+
 
 with st.container():
     link = st.text_input(' ', placeholder='Link do Youtube')
@@ -74,7 +85,7 @@ if link:
 
             # Realizar o download da stream de áudio escolhida
               if selected_stream:
-                file_download = selected_stream.download()
+                file_download = selected_stream.download(output_path=temp_dir)
                 file_ok = file_rename(file_download)
                 st.success("Download concluído com sucesso!")
                 #st.success(f"Salvo em {download_path}")
@@ -86,7 +97,9 @@ if link:
                 # Adicionar um botão para baixar o arquivo
                 with open(file_ok, 'rb') as file:
                     st.download_button(label='Baixar Vídeo', data=file.read(), key='download_button', file_name=os.path.basename(file_ok))
-
+                
+                # Limpar arquivos temporários após o download
+                cleanup_temp_files(temp_dir)
 
 
     except Exception as e:
