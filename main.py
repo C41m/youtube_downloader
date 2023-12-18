@@ -66,18 +66,18 @@ if link:
                 selected_stream = stream
                 break
 
-        download_path = os.path.join(os.path.expanduser("~"), "Downloads")
-        st.write(f'{download_path}')
+        #download_path = os.path.join(os.path.expanduser("~"), "Downloads")
+        #st.write(f'{download_path}')
         # Verificar se o botão de download foi pressionado
         if st.button("Selecionar"):
 
 
             # Realizar o download da stream de áudio escolhida
               if selected_stream:
-                file_download = selected_stream.download(output_path=download_path)
+                file_download = selected_stream.download()
                 file_ok = file_rename(file_download)
                 st.success("Download concluído com sucesso!")
-                st.success(f"Salvo em {download_path}")
+                #st.success(f"Salvo em {download_path}")
                 
                 # with open(file_ok, 'rb') as file:
                 #     btn = st.download_button(label='Downloaddd', data=file.read(), file_name=file_ok, key='mp3')
