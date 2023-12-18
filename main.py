@@ -20,7 +20,6 @@ def file_rename(file_path):
     return new_file
 
 
-
 locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 
 st.set_page_config(page_title='Youtube Downloader')
@@ -32,10 +31,6 @@ with st.container():
     
     # Adiciona uma mensagem para pressionar Enter
     st.info("Pressione Enter para continuar.")
-
-
-
-
 
 
 
@@ -71,8 +66,11 @@ if link:
                 selected_stream = stream
                 break
 
+        download_path = os.path.join(os.path.expanduser("~"), "Downloads")
+        st.write(f'{download_path}')
         # Verificar se o botão de download foi pressionado
         if st.button("Selecionar"):
+
 
             # Realizar o download da stream de áudio escolhida
               if selected_stream:
