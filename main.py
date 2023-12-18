@@ -1,9 +1,8 @@
 import streamlit as st
-import tkinter as tk
-from tkinter import filedialog
-from functions import select_folder
 import locale
 import os
+import platform
+
 from pytube import YouTube
 import base64
 
@@ -37,13 +36,6 @@ with st.container():
 
 
 
-selected_folder_path = st.session_state.get("folder_path", None)
-folder_select_button = st.button("Selecione Diretorio")
-if folder_select_button:
-    selected_folder_path = select_folder()
-    st.session_state.folder_path = selected_folder_path
-    if selected_folder_path:
-        st.write('Selected folder path:', selected_folder_path)
 
 
 
@@ -81,13 +73,16 @@ if link:
 
         # Verificar se o botão de download foi pressionado
         if st.button("Selecionar"):
+
             # Realizar o download da stream de áudio escolhida
-            if selected_stream:
+              if selected_stream:
+                    if platform.system() == "Windows":
+                        download_path = os.path.join(os.path.expanduser("~"), "Downloads")
 
-
-                file_download = selected_stream.download()
-                file_ok = file_rename(file_download)
-                st.success("Download concluído com sucesso!")
+                        file_download = selected_stream.download(output_path=download_path)
+                        file_ok = file_rename(file_download)
+                        st.success("Download concluído com sucesso!")
+                        st.success(f"Salvo em {download_path}")
                 
                 # with open(file_ok, 'rb') as file:
                 #     btn = st.download_button(label='Downloaddd', data=file.read(), file_name=file_ok, key='mp3')
