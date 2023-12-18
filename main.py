@@ -74,17 +74,18 @@ if link:
 
             # Realizar o download da stream de áudio escolhida
               if selected_stream:
-                    if platform.system() == "Windows":
-                        download_path = os.path.join(os.path.expanduser("~"), "Downloads")
-
-                        file_download = selected_stream.download(output_path=download_path)
-                        file_ok = file_rename(file_download)
-                        st.success("Download concluído com sucesso!")
-                        st.success(f"Salvo em {download_path}")
+                file_download = selected_stream.download(output_path=download_path)
+                file_ok = file_rename(file_download)
+                st.success("Download concluído com sucesso!")
+                st.success(f"Salvo em {download_path}")
                 
                 # with open(file_ok, 'rb') as file:
                 #     btn = st.download_button(label='Downloaddd', data=file.read(), file_name=file_ok, key='mp3')
                 #     st.success("Download concluído com sucesso!")
+                
+                # Adicionar um botão para baixar o arquivo
+                with open(file_ok, 'rb') as file:
+                    st.download_button(label='Baixar Vídeo', data=file.read(), key='download_button', file_name=os.path.basename(file_ok))
 
 
 
