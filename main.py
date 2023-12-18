@@ -177,7 +177,7 @@ with st.container():
     if st.button("Baixar Playlist"):
         # Realizar o download de vídeos da playlist
         playlist = Playlist(link)
-        st.header(f'Título da Playlist: {playlist.title}')
+        st.write(f'Título da Playlist: {playlist.title}')
 
         videos = playlist.video_urls
 
