@@ -1,11 +1,12 @@
 import streamlit as st
 import locale
 import os
-from functions import cleanup_temp_files
+from functions import cleanup_temp_files, authenticate_youtube
 from pytube import YouTube
 from pytube import Playlist
 from zipfile import ZipFile
 import tempfile
+
 
 
 def video_info_func():
@@ -76,6 +77,11 @@ def zip_musics_func():
                 file_path = os.path.join(root, file)
                 arcname = os.path.relpath(file_path, download_folder)
                 zipf.write(file_path, arcname=arcname)
+
+
+    youtube, script_directory = authenticate_youtube()
+    CLIENT_SECRETS_FILE = os.path.join(script_directory, "client_secret_999265794631-98539690rmnr37pm89ikd4rdknuomma5.apps.googleusercontent.com.json")
+    youtube = authenticate_youtube()
 
     # Exibir o link para download do arquivo ZIP
     st.info("Clique abaixo para baixar todos os arquivos compactados:")
@@ -189,7 +195,7 @@ with st.container():
             st.write(f'Vídeo {index}/{len(videos)}')
             col1, col2 = st.columns(2)
             with col1:
-                st.image(video.thumbnail_url, width=300)
+                st.image(video.thumbnail_url, width=300, use_column_width=True, )
             with col2:
                 full_title, duration_formatted = video_info_func()
                 st.markdown(f'Nome do Arquivo: {full_title}')
