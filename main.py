@@ -175,9 +175,10 @@ with st.container():
 
     # Verificar se o botão de download foi pressionado
     if st.button("Baixar Playlist"):
+
         # Realizar o download de vídeos da playlist
         playlist = Playlist(link)
-        #st.write(f'Título da Playlist: {playlist.title}')
+        st.markdown(f'# Título da Playlist: {playlist.title}')
 
         videos = playlist.video_urls
 
@@ -185,20 +186,20 @@ with st.container():
             video = YouTube(url)
             
             #
-            #st.write(f'Vídeo {index}/{len(videos)}')
+            st.write(f'Vídeo {index}/{len(videos)}')
             col1, col2 = st.columns(2)
             with col1:
                 st.image(video.thumbnail_url, width=300)
             with col2:
                 full_title, duration_formatted = video_info_func()
-                st.write(f'Nome do Arquivo: {full_title}')
-                st.write(f'Duração: {duration_formatted}')
-                st.write(f'Link: {url}')
+                st.markdown(f'Nome do Arquivo: {full_title}')
+                st.markdown(f'Duração: {duration_formatted}')
+                st.markdown(f'Link: {url}')
                 
                 with st.spinner('Baixando...'):
                     download_playlist = download_playlist_func(video)
                     
-            st.write('---')
+            st.markdown('---')
         
         # Compactar todas as músicas
         zip_musics = zip_musics_func()
