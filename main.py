@@ -185,7 +185,7 @@ with st.container():
             video = YouTube(url)
             
             #
-            st.write(f'Vídeo {index}/{len(videos)}')
+            #st.write(f'Vídeo {index}/{len(videos)}')
             col1, col2 = st.columns(2)
             with col1:
                 st.image(video.thumbnail_url, width=300)
