@@ -68,8 +68,20 @@ def get_video_details(video_url):
     duration = format_duration(duration_iso)
 
     # Thumb do Vídeo
-    thumbnail_url = response['items'][0]['snippet']['thumbnails']['maxres']['url']
+    thumbnails = response['items'][0]['snippet']['thumbnails']
+    thumbnail_url = None
 
+    # Ordem de preferência das qualidades
+    preferred_qualities = ['maxres', 'high', 'medium', 'default']
+
+    # Iterar sobre as preferências de qualidade
+    for quality in preferred_qualities:
+        if quality in thumbnails:
+            thumbnail_url = thumbnails[quality]['url']
+            break  # Parar assim que encontrar uma qualidade válida
+    if thumbnail_url is None:
+        thumbnail_url = 'https://img.freepik.com/fotos-gratis/fundo_53876-32170.jpg?w=1380&t=st=1703201289~exp=1703201889~hmac=2cbbcadb007e1c47f7d4e78ae979803d64b81ebec121bf35c70253f3c97dd2af'
+    
     # Qualidades do Vídeo
     abr_list, audio_streams = video_cache.get_audio_streams_abr(video_url)
 
