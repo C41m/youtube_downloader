@@ -1,0 +1,42 @@
+#root > div:nth-child(1) > div > div > a {
+    display: none;
+}
+
+#root > div:nth-child(1) > div.withScreencast > div > div > header > div.st-emotion-cache-zq5wmm.ezrtsby0 {
+    display: none;
+}
+
+footer.st-emotion-cache-cio0dv {
+    display: none;
+}
+
+#root > div:nth-child(1) > div.withScreencast > div > div > header {
+    display: none;
+}
+
+.st-emotion-cache-15zrgzn {
+    display: none;
+}
+
+.titulo-youtube {
+    padding: 10px;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+    display: inline-block;
+}
+.titulo-tube {
+    background-color: red;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 2px;
+
+}
+.titulo-you {
+    color: black;
+    background-color: white;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    padding: 2px;
+
+}

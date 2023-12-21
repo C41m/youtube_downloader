@@ -27,6 +27,9 @@ def zip_musics_func():
 
     return zip_file_path
 
+# Adicionar estilos CSS de um arquivo externo (substitua 'styles.css' pelo caminho do seu arquivo)
+
+
 # Função para inicializar variáveis de estado
 def initialize_session_state():
     st.session_state.enter_message = None
@@ -37,9 +40,18 @@ initialize_session_state()
 
 locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 
-st.set_page_config(page_title='Youtube Downloader')
+st.set_page_config(page_title='YouTube MP3 Downloader')
 
-st.title('Youtube Downloader')
+# Adicione o código CSS diretamente usando st.markdown
+
+
+# Use st.markdown para criar um contêiner com classes personalizadas
+st.markdown("<h1 class='titulo-youtube'><span class='titulo-you'>You</span><span class='titulo-tube'>Tube</span><span class='titulo-youtube'>MP3 Downloader</span></h1>", unsafe_allow_html=True)
+
+with open("styles.css") as f:
+    css = f.read()
+    st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
+
 
 # Diretório temporário para armazenar os arquivos baixados temporariamente
 temp_dir = tempfile.mkdtemp()
@@ -53,63 +65,73 @@ cleanup_temp_files(temp_dir)
 
 
 with st.container():
-    link = st.text_input(' ', placeholder='Link do Youtube')
-    
-    # Adiciona uma mensagem para pressionar Enter
-    enter_message = st.info("Pressione Enter para continuar.")
-
-if link:
-    title, duration, thumbnail_url, abr_list, audio_streams  = get_video_details(link)
-    
     with st.container():
-        st.image(thumbnail_url, width=450, use_column_width=True)
-        st.markdown(f'### {title}')
-        st.markdown(f'Duração: {duration}')
+        link_video = st.text_input('Insira o link do vídeo do YouTube:', placeholder='Cole o link aqui') 
+        pesq_btn_video = st.button("Pesquisar", key='pesqBtnVideo')
+        #st.session_state.btn_down = st.markdown('')
+
+    if link_video or pesq_btn_video:
+        title, duration, thumbnail_url, abr_list, audio_streams  = get_video_details(link_video)
         
-        selected_bitrate_radio = st.radio('Escolha a qualidade de áudio (Taxa de Bits):', abr_list)
+        with st.container():
+            st.image(thumbnail_url, width=450, use_column_width=True)
+            st.markdown(f'### {title}')
+            st.markdown(f'Duração: {duration}')
+            
+            # Seleção da qualidade de áudio
+            #st.radio('Escolha a qualidade de áudio (Taxa de Bits):', abr_list)
 
-        # Encontrar a stream de áudio correspondente à taxa de bits escolhida
-        selected_stream = None
-        for stream in audio_streams:
-            if stream.abr == selected_bitrate_radio:
-                selected_stream = stream
-                break
-        
-        conv_btn = st.button("Converter", key='convBtnVideo')
-        if conv_btn:
-            # Realizar o download da stream de áudio escolhida
-            if selected_stream:
-                #file_download = selected_stream.download()
-                file_download = selected_stream.download(output_path=temp_dir)
-                file_ok = file_rename(file_download, title)
-                st.success("Conversão concluída!")
-                
-                # Adicionar um botão para baixar o arquivo
-                with open(file_ok, 'rb') as file:
-                    download_btn = st.download_button(label='Download', data=file.read(), key='download_button', file_name=os.path.basename(file_ok))
-                
-                if download_btn:
-                    st.success('Download concluído com sucesso!')
+            # Armazena o estado da sessão
+           #st.session_state.selected_bitrate = selected_bitrate_radio
 
-                # Limpar arquivos temporários após o download
-                cleanup_temp_files(temp_dir)
+        with st.container():
+            selected_bitrate_radio = st.radio('Escolha a qualidade de áudio (Taxa de Bits):', abr_list, index=abr_list.index(st.session_state.selected_bitrate))
 
-            else:
-                st.error('Erro: Stream não encontrada')
+            # Encontra a stream de áudio correspondente à taxa de bits escolhida
+            selected_stream = None
+            for stream in audio_streams:
+                if stream.abr == selected_bitrate_radio:
+                    selected_stream = stream
+                    break
 
-    st.markdown('---')
+            conv_btn = st.button("Converter", key='convBtnVideo')
+            if conv_btn:
+                st.session_state.info_video = st.info('Baixando...')
+                progress_bar = st.progress(0)
+                # Realizar o download da stream de áudio escolhida
+                if selected_stream:
+                    progress_bar.progress(15)
+                    file_download = selected_stream.download(output_path=temp_dir)
+                    progress_bar.progress(50)
+                    file_ok = file_rename(file_download, title)
+                    progress_bar.progress(100)
+                    st.session_state.info_video.success('Conversão concluída!')
+
+                    # Adicionar um botão para baixar o arquivo
+                    with open(file_ok, 'rb') as file:
+                        download_btn = st.download_button(label='Download', data=file.read(), key='download_button', file_name=os.path.basename(file_ok))
+                    
+                    if download_btn:
+                        st.session_state.enter_message
+
+                    # Limpar arquivos temporários após o download
+                    cleanup_temp_files(temp_dir)
+
+                else:
+                    st.error('Erro: Stream não encontrada')
 
 
 st.markdown('---')
 with st.container():
 
     with st.container():
-        link = st.text_input('Insira o link da playlist do Youtube:', placeholder='Cole o link aqui') 
+        link = st.text_input('Insira o link da playlist do YouTube:', placeholder='Cole o link aqui') 
         conv_btn_playlist = st.button("Converter!", key='convBtnPlaylist')
         st.session_state.btn_down = st.markdown('')
 
     
     if link and conv_btn_playlist:
+
         st.session_state.enter_message = st.info('Carregando...')
         progress_bar1 = st.progress(0)
         video_ids, video_titles, video_thumbs, playlist_title, duration, playlist_urls, progress_bar1 = get_playlist_details(link, progress_bar1)
