@@ -106,7 +106,6 @@ with st.container():
 
     
     if link and conv_btn_playlist:
-        cleanup_temp_files(temp_dir)
         st.session_state.enter_message.empty()  # Limpar a mensagem
         st.session_state.enter_message = st.info('Carregando...')
         progress_bar1 = st.progress(0)
