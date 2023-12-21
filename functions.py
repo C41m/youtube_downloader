@@ -31,7 +31,7 @@ class VideoCache:
             
             except Exception as e:
                 print(f"Erro ao obter transmissões de áudio: {e}")
-                return []
+                return [], []
 
 video_cache = VideoCache()
 
