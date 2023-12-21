@@ -27,7 +27,13 @@ def zip_musics_func():
 
     return zip_file_path
 
+# Função para inicializar variáveis de estado
+def initialize_session_state():
+    st.session_state.enter_message = None
+    st.session_state.btn_down = None
 
+# Inicializar variáveis de estado ao iniciar o aplicativo
+initialize_session_state()
 
 locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 
@@ -96,8 +102,6 @@ if link:
 
 st.markdown('---')
 with st.container():
-    #if 'enter_message' not in st.session_state:
-        #st.session_state.enter_message = st.info("Pressione Enter para continuar.")
 
     with st.container():
         link = st.text_input('Insira o link da playlist do Youtube:', placeholder='Cole o link aqui') 
@@ -106,7 +110,6 @@ with st.container():
 
     
     if link and conv_btn_playlist:
-        st.session_state.enter_message.empty()  # Limpar a mensagem
         st.session_state.enter_message = st.info('Carregando...')
         progress_bar1 = st.progress(0)
         video_ids, video_titles, video_thumbs, playlist_title, duration, playlist_urls, progress_bar1 = get_playlist_details(link, progress_bar1)

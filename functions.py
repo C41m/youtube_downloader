@@ -195,11 +195,8 @@ def get_playlist_details(playlist_url, progress_bar1):
         if video_id:
             video_ids.append(video_id)
         else:
-            # Aqui você pode lidar com a situação em que 'videoId' não está disponível
-            # Pode adicionar uma ID padrão, pular o item, etc.
-            print('Erro aqui')  
+            print('Error')  
 
-    print('Peguei ID')
 
     video_titles = [item['snippet']['title'] for item in all_playlist_items]
 
@@ -226,8 +223,8 @@ def get_playlist_details(playlist_url, progress_bar1):
     for i, (video_id) in enumerate(video_ids, 1):
         request = youtube.videos().list(part='contentDetails,snippet,statistics,player', id=video_id)
         response_video = request.execute()
-        print(video_id)
-        print(response_video)
+        # print(video_id)
+        # print(response_video)
 
         # Duração do Vídeo
         duration_iso = response_video['items'][0]['contentDetails']['duration']
