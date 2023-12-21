@@ -56,7 +56,7 @@ def cleanup_temp_files(directory):
 def get_video_details(video_url):
     video = YouTube(video_url)
     video_id = video.video_id
-    youtube = build('youtube', 'v3', developerKey='AIzaSyDFq1AMiBfEfOe2g9vC6FU4tJhzySgJk9A')
+    youtube = build('youtube', 'v3', developerKey='AIzaSyCQO82cX4dDufUNql7nU4apLwn_np1P9bo')
     request = youtube.videos().list(part='contentDetails,snippet,statistics,player', id=video_id)
     response = request.execute()
 
@@ -162,7 +162,7 @@ def get_playlist_details(playlist_url, progress_bar1):
     playlist = Playlist(playlist_url)
     playlist_id = playlist.playlist_id
     playlist_urls = playlist.video_urls
-    youtube = build('youtube', 'v3', developerKey='AIzaSyDFq1AMiBfEfOe2g9vC6FU4tJhzySgJk9A')
+    youtube = build('youtube', 'v3', developerKey='AIzaSyCQO82cX4dDufUNql7nU4apLwn_np1P9bo')
     # request = youtube.playlistItems().list(part='contentDetails,id,snippet,status', playlistId=playlist_id)
     # response = request.execute()
 
