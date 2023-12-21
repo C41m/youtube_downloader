@@ -234,3 +234,9 @@ def get_playlist_details(playlist_url, progress_bar1):
     progress_bar1.empty()
 
     return video_ids, video_titles, video_thumbs, playlist_title, duration, playlist_urls, progress_bar1
+
+
+def is_valid_youtube_link(link):
+    pattern = re.compile(r'(https?://)?(www\.)?(youtube|youtu|youtube-nocookie)\.(com|be)/'
+                        '(watch\?v=|embed/|v/|.+\?v=)?([^&=%\?]{11})')
+    return bool(pattern.match(link))

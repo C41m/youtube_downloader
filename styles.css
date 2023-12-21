@@ -1,18 +1,18 @@
 #root > div:nth-child(1) > div > div > a {
     display: none;
 }
-
+/* 
 #root > div:nth-child(1) > div.withScreencast > div > div > header > div.st-emotion-cache-zq5wmm.ezrtsby0 {
     display: none;
-}
+} */
 
 footer.st-emotion-cache-cio0dv {
     display: none;
 }
 
-#root > div:nth-child(1) > div.withScreencast > div > div > header {
+/* #root > div:nth-child(1) > div.withScreencast > div > div > header {
     display: none;
-}
+} */
 
 .st-emotion-cache-15zrgzn {
     display: none;
