@@ -85,7 +85,8 @@ with st.container():
            #st.session_state.selected_bitrate = selected_bitrate_radio
 
         with st.container():
-            selected_bitrate_radio = None
+            st.session_state.selected_bitrate_radio = None
+            st.session_state.selected_bitrate = None
             selected_bitrate_radio = st.radio('Escolha a qualidade de áudio (Taxa de Bits):', abr_list, index=abr_list.index(st.session_state.selected_bitrate))
 
             # Encontra a stream de áudio correspondente à taxa de bits escolhida
