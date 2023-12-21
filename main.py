@@ -34,7 +34,7 @@ def zip_musics_func():
 def initialize_session_state():
     st.session_state.enter_message = None
     st.session_state.btn_down = None
-
+    
 # Inicializar variáveis de estado ao iniciar o aplicativo
 initialize_session_state()
 
@@ -85,6 +85,7 @@ with st.container():
            #st.session_state.selected_bitrate = selected_bitrate_radio
 
         with st.container():
+            selected_bitrate_radio = None
             selected_bitrate_radio = st.radio('Escolha a qualidade de áudio (Taxa de Bits):', abr_list, index=abr_list.index(st.session_state.selected_bitrate))
 
             # Encontra a stream de áudio correspondente à taxa de bits escolhida
