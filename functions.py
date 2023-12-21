@@ -106,7 +106,7 @@ def format_duration(duration_iso):
 
 def get_video_streams(video_url):
     try:
-        video = YouTube(video_url)
+        video = YouTube(video_url, use_oauth=True, allow_oauth_cache=True)
 
         # Obter todas as transmissões de vídeo disponíveis
         video_streams = video.streams.filter(file_extension="mp4").order_by('resolution')
