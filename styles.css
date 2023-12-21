@@ -1,4 +1,4 @@
-/* #root > div:nth-child(1) > div > div > a {
+#root > div:nth-child(1) > div > div > a {
     display: none;
 }
 
@@ -16,7 +16,7 @@ footer.st-emotion-cache-cio0dv {
 
 .st-emotion-cache-15zrgzn {
     display: none;
-} */
+}
 
 .titulo-youtube {
     padding: 10px;
