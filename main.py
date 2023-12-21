@@ -136,10 +136,14 @@ with st.container():
                     # Obter a primeira stream de áudio disponível
                     audio_stream = video.streams.filter(only_audio=True).order_by('abr').last()
                     if audio_stream:
-                        file_download = audio_stream.download(output_path=temp_dir)
-                        file_ok = file_rename(file_download, video_name)
-                        #cleanup_temp_files(temp_dir)
-                        st.success(f'Conversão do vídeo {i}/{len(video_titles)} concluído!')
+                        try:
+                            file_download = audio_stream.download(output_path=temp_dir)
+                            file_ok = file_rename(file_download, video_name)
+                            #cleanup_temp_files(temp_dir)
+                            st.success(f'Conversão do vídeo {i}/{len(video_titles)} concluído!')
+                        except Exception:
+                            st.warning(f"Erro ao baixar o vídeo - Restrições")
+
             st.markdown('---')
 
         # Adicionar o botão de download após o progresso
