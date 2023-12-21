@@ -1,4 +1,4 @@
-#root > div:nth-child(1) > div > div > a {
+/* #root > div:nth-child(1) > div > div > a {
     display: none;
 }
 
@@ -16,7 +16,7 @@ footer.st-emotion-cache-cio0dv {
 
 .st-emotion-cache-15zrgzn {
     display: none;
-}
+} */
 
 .titulo-youtube {
     padding: 10px;
@@ -39,4 +39,41 @@ footer.st-emotion-cache-cio0dv {
     border-top-left-radius: 10px;
     padding: 2px;
 
+}
+
+#root > div:nth-child(1) > div.withScreencast > div > div > div > section.st-emotion-cache-1cypcdb.eczjsme11 > div.st-emotion-cache-6qob1r.eczjsme3 > div.st-emotion-cache-16txtl3.eczjsme4 > div > div > div > div:nth-child(7) :hover{
+    animation: jello 3s ease-in-out infinite alternate;
+}
+
+#root > div:nth-child(1) > div.withScreencast > div > div > div > section.st-emotion-cache-1cypcdb.eczjsme11 > div.st-emotion-cache-6qob1r.eczjsme3 > div.st-emotion-cache-16txtl3.eczjsme4 > div > div > div > div:nth-child(4) :hover {
+    animation: jello 3s ease-in-out infinite alternate;
+}
+
+#root > div:nth-child(1) > div.withScreencast > div > div > div > section.st-emotion-cache-1cypcdb.eczjsme11 > div.st-emotion-cache-6qob1r.eczjsme3 > div.st-emotion-cache-16txtl3.eczjsme4 > div > div > div > div:nth-child(3) :hover {
+    animation: jello 3s ease-in-out infinite alternate;
+}
+
+#root > div:nth-child(1) > div.withScreencast > div > div > div > section.st-emotion-cache-1cypcdb.eczjsme11 > div.st-emotion-cache-6qob1r.eczjsme3 > div.st-emotion-cache-16txtl3.eczjsme4 > div > div > div > div:nth-child(6) :hover {
+    animation: jello 3s ease-in-out infinite alternate;
+}
+
+#root > div:nth-child(1) > div.withScreencast > div > div > div > section.st-emotion-cache-1cypcdb.eczjsme11 > div.st-emotion-cache-6qob1r.eczjsme3 > div.st-emotion-cache-16txtl3.eczjsme4 > div > div > div > div:nth-child(8) :hover {
+    animation: jello 3s ease-in-out infinite alternate;
+}
+
+#root > div:nth-child(1) > div.withScreencast > div > div > div > section.st-emotion-cache-1cypcdb.eczjsme11 > div.st-emotion-cache-6qob1r.eczjsme3 > div.st-emotion-cache-16txtl3.eczjsme4 > div > div > div > div:nth-child(9) :hover {
+    animation: jello 3s ease-in-out infinite alternate;
+}
+
+
+@keyframes jello {
+    0%, 100% {
+        transform: scale3d(1, 1, 1);
+    }
+    30%, 50%, 70%, 90% {
+        transform: scale3d(1.01, 0.99, 1);
+    }
+    40%, 60%, 80% {
+        transform: scale3d(0.99, 1.01, 1);
+    }
 }
